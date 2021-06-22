@@ -174,7 +174,6 @@ run() {
 }
 
 gcm() {
-    pwd
     if [ $# -gt 1 ]; then
         argsString="$*"
         git commit -m ''"$argsString"
@@ -225,4 +224,14 @@ gpush() {
     git add . 
     git commit -m "$1"
     git push
+}
+
+gcdb() {
+    branchName=$(git rev-parse --abbrev-ref HEAD)
+    git add .
+    git stash
+    git checkout develop
+    git pull
+    git checkout ''"$branchName"
+    git stash apply && git stash drop
 }

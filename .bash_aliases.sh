@@ -43,6 +43,7 @@ alias gc="git checkout"
 alias gcd="git checkout develop"
 alias gcb="git checkout -b"
 alias gcdp="git checkout develop && git pull"
+alias gcmp="git checkout main && git pull"
 
 # git log
 alias gl="git log"
