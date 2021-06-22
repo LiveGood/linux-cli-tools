@@ -173,6 +173,16 @@ run() {
     fi
 }
 
+gcm() {
+    pwd
+    if [ $# -gt 1 ]; then
+        argsString="$*"
+        git commit -m ''"$argsString"
+    else
+        git commit -m $1
+    fi
+}
+
 gcmn() {
     git commit -m $1 --no-verify
 }
