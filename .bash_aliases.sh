@@ -26,6 +26,5 @@ alias ytu="yarn test:update"
 alias yg="yarn gen"
 alias r="yarn dev"
 
-# test
 # convert line endings, just to remind myself how to
 # dos2unix .sh .bash 
