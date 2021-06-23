@@ -173,19 +173,6 @@ run() {
     fi
 }
 
-gcm() {
-    if [ $# -gt 1 ]; then
-        argsString="$*"
-        git commit -m ''"$argsString"
-    else
-        git commit -m $1
-    fi
-}
-
-gcmn() {
-    git commit -m $1 --no-verify
-}
-
 babl() {
    jsFile="$1.js"
    compiledJsFile="$1-compiled.js"
@@ -220,18 +207,13 @@ yapr() {
     yarn install
 }
 
-gpush() {
-    git add . 
-    git commit -m "$1"
-    git push
-}
-
-gcdb() {
-    branchName=$(git rev-parse --abbrev-ref HEAD)
-    git add .
-    git stash
-    git checkout develop
-    git pull
-    git checkout ''"$branchName"
-    git stash apply && git stash drop
+getArgsString() {
+    if [ $# -gt 1 ]; then
+        argsString="$*"
+        echo 'many'
+        return ''"$argsString"
+    else
+        echo 'one'
+        return "$1"
+    fi
 }
