@@ -24,6 +24,7 @@ alias yb="yarn build"
 alias ytc="yarn test:cover"
 alias ytu="yarn test:update"
 alias yg="yarn gen"
+alias yl="yarn lint"
 alias r="yarn dev"
 
 # convert line endings, just to remind myself how to

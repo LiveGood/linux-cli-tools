@@ -80,6 +80,15 @@ gsa() {
         git stash apply
     fi
 }
+
+gspu() {
+    if [ $# -gt 1 ]; then
+        argsString="$*"
+        git stash push -m ''"$argsString"
+    else
+        git stash push -m $1
+    fi
+}
 #################################################
 
 # 1. stash changes form current branch
