@@ -3,19 +3,25 @@
 alias gp="git push"
 alias gpu="git pull"
 alias ga="git add ."
+alias gd="git diff"
+alias gs="git status"
+
+# git reset
 alias grh1="git reset HEAD~1"
 alias grh2="git reset HEAD~2"
 alias grh3="git reset HEAD~3"
-alias gd="git diff"
-alias gs="git status"
 alias grh="git reset --hard"
+alias grs="git reset --soft"
+
+# git fetch
+alias gfa="git fetch --all"
 
 # git checkout
 alias gc="git checkout"
 alias gcd="git checkout develop"
+alias gcm="git checkout main"
 alias gcb="git checkout -b"
 alias gcdp="git checkout develop && git pull"
-alias gcmp="git checkout main && git pull"
 
 # git log
 alias gl="git log"
@@ -23,25 +29,31 @@ alias gl="git log"
 # git stash
 alias gst="git stash"
 alias gsc="git stash clear"
-alias gsm="git stash push -m"
+alias gspm="git stash push --message"
 alias gsp="git stash pop"
-# alias gsa="git stash apply"
-# alias gsd="git stash drop"
 alias gsl="git stash list"
-
-alias gf="git fetch --all"
 
 # git branch
 alias gb="git branch"
 alias gbrn="git branch -m "
+alias gbd="git branch -D"
+alias gbdo="git push origin --delete"
 #################################################
 
+# git merge
+alias gmd="git merge develop"
+
 #git commit 
-gcmn() {
-    git commit -m $1 --no-verify
+cmn() {
+    if [ $# -gt 1 ]; then
+        argsString="$*"
+        git commit -m ''"$argsString" --no-verify
+    else
+        git commit -m $1 --no-verify
+    fi
 }
 
-gcm() {
+cm() {
     if [ $# -gt 1 ]; then
         argsString="$*"
         git commit -m ''"$argsString"
@@ -103,4 +115,9 @@ gcdb() {
     git checkout ''"$branchName"
     git merge develop
     git stash apply && git reset . && git stash drop
+}
+
+gbda() {
+    local branchName=$1
+    git branch -D $branchName && echo "Deleting remote branch $branchName"  && git push origin --delete $branchName
 }

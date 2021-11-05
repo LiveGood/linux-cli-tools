@@ -207,6 +207,10 @@ yapr() {
     yarn install
 }
 
+k() {
+    kill $(lsof -t -i:$1)
+}
+
 getArgsString() {
     if [ $# -gt 1 ]; then
         argsString="$*"
