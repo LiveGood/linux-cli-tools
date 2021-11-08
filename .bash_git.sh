@@ -56,9 +56,10 @@ cmn() {
 cm() {
     if [ $# -gt 1 ]; then
         argsString="$*"
-        git commit -m ''"$argsString"
+        git commit -m "$argsString"
     else
-        git commit -m $1
+
+        git commit -m "$1"
     fi
 }
 #################################################
@@ -68,9 +69,9 @@ gpush() {
     git add . 
     if [ $# -gt 1 ]; then
         argsString="$*"
-        git commit -m ''"$argsString"
+        git commit -m "$argsString"
     else
-        git commit -m $1
+        git commit -m "$1"
     fi
     git push
 }
