@@ -1,4 +1,4 @@
-
+# Bash Aliases for docker commands. More to be used as a reference
 
 # 1. Creates a container from image "docker run"
 # 2. With interactive terminal options "-it"

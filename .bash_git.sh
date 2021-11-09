@@ -47,7 +47,7 @@ alias gmd="git merge develop"
 cmn() {
     if [ $# -gt 1 ]; then
         argsString="$*"
-        git commit -m ''"$argsString" --no-verify
+        git commit -m "$argsString" --no-verify
     else
         git commit -m "$1" --no-verify
     fi
@@ -58,7 +58,6 @@ cm() {
         argsString="$*"
         git commit -m "$argsString"
     else
-
         git commit -m "$1"
     fi
 }
@@ -86,6 +85,7 @@ gsd() {
     fi
 }
 
+# git stash apply
 gsa() {
     if [[ $1 =~ ^[0-9]+$ ]]; then
         git stash apply stash@{$1}
@@ -94,10 +94,11 @@ gsa() {
     fi
 }
 
+# git stash push -m
 gspu() {
     if [ $# -gt 1 ]; then
         argsString="$*"
-        git stash push -m ''"$argsString"
+        git stash push -m "$argsString"
     else
         git stash push -m $1
     fi
@@ -118,6 +119,7 @@ gcdb() {
     git stash apply && git reset . && git stash drop
 }
 
+# Delete delete remote branch
 gbda() {
     local branchName=$1
     git branch -D $branchName && echo "Deleting remote branch $branchName"  && git push origin --delete $branchName
