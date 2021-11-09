@@ -49,7 +49,7 @@ cmn() {
         argsString="$*"
         git commit -m ''"$argsString" --no-verify
     else
-        git commit -m $1 --no-verify
+        git commit -m "$1" --no-verify
     fi
 }
 
