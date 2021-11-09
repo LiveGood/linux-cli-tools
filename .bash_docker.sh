@@ -9,7 +9,10 @@
 # 7. Name of the new container "--name test-mongo"
 # 8. Name of the image to use "172888/intelrx-full-mongodb"
 
-# docker create new persitant container with volume from image
+# docker create  persitant container with volume from image
+# d => docker
+# c => container
+# p => persitent
 dcp() {
   host_directory=$1  
   container_directory=$2
