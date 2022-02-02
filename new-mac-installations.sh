@@ -67,11 +67,14 @@ alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 alias brave='open -a "Brave Browser.app"'
 alias path='echo "${PATH//:/\n}"'
 
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
 # Set the Vault cluster address.
 export VAULT_ADDR=https://vault.in.ft.com
 
 # Set the personal access token to use for authentication with Vault.
 export VAULT_AUTH_GITHUB_TOKEN=$(security find-generic-password -a "${USER}" -s "FT Vault" -w)
+export COMPOSER_AUTH_GITHUB_TOKEN=$(security find-generic-password -a "${USER}" -s "FT Composer" -w)
 
 function regen_token() {
   new_token=$1
@@ -88,9 +91,6 @@ function vault () {
     vault login --method=github token=$VAULT_AUTH_GITHUB_TOKEN
   fi
 }
-
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
 
 # BEGIN SNIPPET: Platform.sh CLI configuration
 HOME=${HOME:-'/Users/deyan.dachev'}
