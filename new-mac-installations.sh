@@ -32,6 +32,10 @@ brew install lastpass-cli
 echo "Installing Visual Studio Code"
 brew install --cask visual-studio-code
 
+echo "Install GIT credential manager"
+brew tap microsoft/git
+brew install --cask git-credential-manager-core
+
 cat <<'EOF' >>~/.zshrc
 
 # Add Visual Studio Code (code)
@@ -73,8 +77,32 @@ source $(brew --prefix nvm)/nvm.sh
 export VAULT_ADDR=https://vault.in.ft.com
 
 # Set the personal access token to use for authentication with Vault.
+#  security add-generic-password -a "$USER" -s "FT Composer" -w "<github-personal-access-token>"
+export COMPOSER_AUTH_GITHUB_TOKEN=$(security find-generic-password -a "${USER}" -s "FT Composer" -w)
+
 export VAULT_AUTH_GITHUB_TOKEN=$(security find-generic-password -a "${USER}" -s "FT Vault" -w)
 export COMPOSER_AUTH_GITHUB_TOKEN=$(security find-generic-password -a "${USER}" -s "FT Composer" -w)
+
+function add_secret() {
+  if [[ $# != 2 ]]; then 
+    echo "add_secret requires 2 arguments: <secret-name> <secret>"
+    exit 1;
+  fi
+
+  name=$1
+  password=$2
+  security add-generic-password -a "$USER" -s "$name" -w "$password"
+}
+
+function get_secret() {
+    if [[ $# != 1 ]]; then 
+    echo "add_secret requires 1: <secret-name> "
+    exit 1;
+  fi
+
+  name=$1
+  security find-generic-password -a "${USER}" -s "$name" -w | pbcopy 
+}
 
 function regen_token() {
   new_token=$1
@@ -101,4 +129,5 @@ function opn() {
     chrome https://stackoverflow.com/a/58966776
   fi
 }
+
 EOF
