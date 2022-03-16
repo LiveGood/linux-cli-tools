@@ -131,3 +131,15 @@ function opn() {
 }
 
 EOF
+
+cat <<'EOF' >>~/credentials2.json
+lpass show --notes "eZ Auth" | python2 -c '
+import os, sys, json;
+stdinJson = json.load(sys.stdin);
+stdinJson["github-oauth"] = {
+  "github.com": os.environ["COMPOSER_AUTH_GITHUB_TOKEN"]
+};
+authFile = open("auth.json", "w")
+authFile.write(json.dumps(stdinJson, indent=2))
+authFile.close()'
+EOF

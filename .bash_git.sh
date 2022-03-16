@@ -43,7 +43,11 @@ alias gbdo="git push origin --delete"
 # git merge
 alias gmd="git merge develop"
 
-#git commit 
+#git commit
+cma() {
+    git commit --amend --no-edit
+}
+
 cmn() {
     if [ $# -gt 1 ]; then
         argsString="$*"
@@ -74,11 +78,9 @@ gpush() {
     fi
     git push
 }
-#################################################
 
-# git stash
-gsd() {
-    if [[ $1 =~ ^[0-9]+$ ]]; then
+gsdr() {
+    if [[ $1 =~ "^[0-9]+$" ]]; then
         git stash drop stash@{$1}
     else
         git stash drop
@@ -120,7 +122,7 @@ gcdb() {
 }
 
 # Delete delete remote branch
-gbda() {
-    local branchName=$1
-    git branch -D $branchName && echo "Deleting remote branch $branchName"  && git push origin --delete $branchName
-}
+# gbda() {
+#     local branchName=$1
+#     git branch -D $branchName && echo "Deleting remote branch $branchName"  && git push origin --delete $branchName
+# }
