@@ -26,3 +26,10 @@ dcp() {
   # USE:
   # dcp $PWD /bitnami/mongodb/data/db 27018:207017 test-mongo 172888/intelrx-full-mongodb
 }
+
+alias dcb="docker compose build"
+alias dcu="docker compose up"
+alias dcd="docker compose down"
+alias dcs="docker compose stop"
+alias dce="docker compose exec"
+alias dci="docker compose images"
