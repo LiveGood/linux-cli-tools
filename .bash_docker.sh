@@ -21,7 +21,12 @@ dcp() {
   image_name=$5
 
   # docker run -it -d -v $PWD:/bitnami/mongodb/data/db -p 27018:207017 --name test-mongo 172888/intelrx-full-mongodb
-  docker run -it -d -v $host_directory:$container_directory -p $ports_map --name $new_container_name $image_name
+  docker run \
+    -it \
+    -d \
+    -v $host_directory:$container_directory \
+    -p $ports_map \
+    --name $new_container_name $image_name
 
   # USE:
   # dcp $PWD /bitnami/mongodb/data/db 27018:207017 test-mongo 172888/intelrx-full-mongodb
@@ -29,6 +34,7 @@ dcp() {
 
 alias dcb="docker compose build"
 alias dcu="docker compose up"
+alias dcud="docker compose up --detach"
 alias dcd="docker compose down"
 alias dcs="docker compose stop"
 alias dce="docker compose exec"
