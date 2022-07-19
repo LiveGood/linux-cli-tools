@@ -1,5 +1,7 @@
 
 # Git alliases
+
+# git push which sets upstream with current branch if needed
 alias gp='(
 local origin=$(git remote show);
 local branch=$(git branch --show-current);
@@ -51,47 +53,47 @@ alias gbc="git branch --show-current"
 # git merge
 alias gmd="git merge develop"
 
-#git commit --amend
-cma() {
+local argsString=''
+# Alllows all the other git alias functions to receive messages without the need to add single or double quotes
+# Example:
+# cm New commit message ---> git commit -m 'New commit message'
+setArgsString() {
     if [ $# -gt 1 ]; then
         argsString="$*"
-        git commit  --amend -m "$argsString"
     else
-        git commit  --amend -m "$1"
+        argsString="$1"
     fi
 }
 
-cmn() {
-    if [ $# -gt 1 ]; then
-        argsString="$*"
-        git commit -m "$argsString" --no-verify
-    else
-        git commit -m "$1" --no-verify
-    fi
-}
-
+# git commit
 cm() {
-    if [ $# -gt 1 ]; then
-        argsString="$*"
-        git commit -m "$argsString"
-    else
-        git commit -m "$1"
-    fi
+    setArgsString $*
+    git commit -m "$argsString"
 }
+
+#git commit with add all current changes
+cma() {
+    setArgsString $*
+    git commit --all -m "$argsString"
+}
+
+# git commit with no precommit hooks executed
+cmn() {
+    setArgsString $*
+    git commit -m "$argsString" --no-verify
+}
+
 #################################################
 
-# git push all current chagnes
+# git add, commit and push together
 gpush() {
-    git add . 
-    if [ $# -gt 1 ]; then
-        argsString="$*"
-        git commit -m "$argsString"
-    else
-        git commit -m "$1"
-    fi
-    git push
+    setArgsString $*
+    git commit -am "$argsString"
+    # References to the allias on line 3
+    gp
 }
 
+# git stash drop
 gsdr() {
     if [[ $1 =~ "^[0-9]+$" ]]; then
         git stash drop stash@{$1}
@@ -111,12 +113,8 @@ gsa() {
 
 # git stash push -m
 gspu() {
-    if [ $# -gt 1 ]; then
-        argsString="$*"
-        git stash push -m "$argsString"
-    else
-        git stash push -m $1
-    fi
+    setArgsString $*
+    git stash push -m "$argsString"
 }
 #################################################
 
