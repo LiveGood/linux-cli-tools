@@ -1,6 +1,13 @@
 
 # Git alliases
-alias gp="git push"
+alias gp='(
+local origin=$(git remote show);
+local branch=$(git branch --show-current);
+$(git branch -vv | grep -q "\[$origin/$branch\]") &&
+git push ||
+git push --set-upstream $origin $branch
+)'
+
 alias gpu="git pull"
 alias ga="git add ."
 alias gd="git diff"
@@ -38,14 +45,20 @@ alias gb="git branch"
 alias gbrn="git branch -m "
 alias gbd="git branch -D"
 alias gbdo="git push origin --delete"
+alias gbc="git branch --show-current"
 #################################################
 
 # git merge
 alias gmd="git merge develop"
 
-#git commit
+#git commit --amend
 cma() {
-    git commit --amend --no-edit
+    if [ $# -gt 1 ]; then
+        argsString="$*"
+        git commit  --amend -m "$argsString"
+    else
+        git commit  --amend -m "$1"
+    fi
 }
 
 cmn() {
@@ -112,7 +125,7 @@ gspu() {
 # 3. go to previous branch and merge from develop
 # 4. unstash previous changes
 gcdb() {
-    local branchName=$(git rev-parse --abbrev-ref HEAD)
+    local branchName=$(git branch --show-current)
     git add .
     git stash
     git checkout develop && git pull
