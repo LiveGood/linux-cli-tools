@@ -1,15 +1,7 @@
 
 # Git alliases
 
-# git push which sets upstream with current branch if needed
-alias gp='(
-local origin=$(git remote show);
-local branch=$(git branch --show-current);
-$(git branch -vv | grep -q "\[$origin/$branch\]") &&
-git push ||
-git push --set-upstream $origin $branch
-)'
-
+alias gp="git push"
 alias gpu="git pull"
 alias ga="git add ."
 alias gd="git diff"
