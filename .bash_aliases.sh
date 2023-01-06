@@ -11,8 +11,7 @@ alias c=clear
 alias rf="rm -rf"
 alias xclip="xclip -selection c"
 
-
-# Programs run from Windows
+# Programs run from Windows WCL2
 alias chrome="/mnt/c/'Program Files'/Google/Chrome/Application/chrome.exe"
 
 # Yarn alliases
@@ -29,5 +28,6 @@ alias yl="yarn lint"
 alias ys="yarn start"
 alias r="yarn dev"
 alias rel="rf .next && echo -e '${RED}Deleted .next folder...${NC}' && yarn dev"
+alias path="echo $PATH"
 # convert line endings, just to remind myself how to
 # dos2unix .sh .bash 
