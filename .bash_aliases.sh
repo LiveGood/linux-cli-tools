@@ -4,7 +4,7 @@ export BASE_EMAIL="FleshThps@gmail.com"
 export TEMPFILE=/home/deyan/Documents/temp/.bash_temp.txt
 
 # Restarts the bashrc file to update changes 
-alias rb="source ~/.bashrc"
+alias rb="source ~/.zshrc"
 # Restarts the entile shell
 alias eb="exec bash"
 alias c=clear
