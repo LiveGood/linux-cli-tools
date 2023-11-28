@@ -13,6 +13,7 @@ start() {
     fi
 }
 
+# Windows copy
 copy() {
     if [ "$1" = "-f" ] || [ "$1" = "--file" ]; then
         content=$(cat $2)
@@ -221,3 +222,18 @@ getArgsString() {
         return "$1"
     fi
 }
+
+add_to_path_if_not_exist() {
+  local PATH_ADDTION_CHECK=$1
+  if [[ "$2" ]]; then
+    local SECOND_PATH_ADDTION=":$2"
+  else
+    local SECOND_PATH_ADDTION=""
+  fi
+  
+  case ":$PATH:" in
+    *":$PATH_ADDTION_CHECK:"*) ;;
+    *) export PATH="$PATH_ADDTION_CHECK$SECOND_PATH_ADDTION:$PATH" ;;
+  esac
+}
+
