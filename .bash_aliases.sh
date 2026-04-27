@@ -1,7 +1,7 @@
 
 export GITHUB_USERNAME="LiveGood"
 export BASE_EMAIL="FleshThps@gmail.com"
-export TEMPFILE=/home/deyan/Documents/temp/.bash_temp.txt
+export TEMPFILE=~/Documents/temp/.bash_temp.txt
 
 # Restarts the bashrc file to update changes 
 alias rb="source ~/.zshrc"
@@ -28,6 +28,13 @@ alias yl="yarn lint"
 alias ys="yarn start"
 alias r="yarn dev"
 alias rel="rf .next && echo -e '${RED}Deleted .next folder...${NC}' && yarn dev"
-alias path="echo $PATH"
+alias path="echo $PATH | sed 's/:/\n/g'"
+alias lines="wc -l"
+alias mb="du -h"
 # convert line endings, just to remind myself how to
 # dos2unix .sh .bash 
+
+# Check current PC video card
+alias vcard="lspci -v -s $(lspci | grep VGA | grep -oP '\d{2}:\d{2}\.\d{1}')"
+
+

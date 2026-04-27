@@ -72,7 +72,7 @@ emptylastline()
 }
 
 # sudo wrapper if I want to log something before it's execution
-sudo() {
+sud() {
     argsString="$*"
     eval "/usr/bin/sudo $argsString"
 }
@@ -235,5 +235,12 @@ add_to_path_if_not_exist() {
     *":$PATH_ADDTION_CHECK:"*) ;;
     *) export PATH="$PATH_ADDTION_CHECK$SECOND_PATH_ADDTION:$PATH" ;;
   esac
+}
+
+compc() {
+    local FILE_NAME=$1
+    gcc $FILE_NAME.c -o $FILE_NAME.out
+    ./$FILE_NAME.out
+    rm -rf $FILE_NAME.out
 }
 
